@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Chuck Almanac · a cozy field guide to every marmot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EDF1E6; --card:#FBFAF3; --ink:#3E352E; --ink-soft:#7A6C5D;
+    --meadow:#8FAE7A; --meadow-deep:#6E9160;
+    --sky:#A9C4E8; --sky-deep:#8AA9D6;
+    --honey:#E0A34E; --berry:#C65D82;
+    --burrow:#B58A5E; --burrow-deep:#8A6440; --line:#E3DBC9;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;overflow-x:hidden}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:72px 24px 0;text-align:center;
+    background:linear-gradient(180deg,var(--sky) 0%,var(--sky) 30%,#C7DCE0 62%,var(--bg) 100%);overflow:hidden}
+  .cloud{position:absolute;background:#fff;border-radius:50px;opacity:.85;filter:blur(.4px)}
+  .cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+  .c1{width:120px;height:34px;top:60px;left:8%}
+  .c1::before{width:52px;height:52px;top:-22px;left:16px}.c1::after{width:38px;height:38px;top:-14px;left:60px}
+  .c2{width:90px;height:26px;top:120px;right:10%}
+  .c2::before{width:40px;height:40px;top:-18px;left:12px}.c2::after{width:30px;height:30px;top:-10px;left:44px}
+  @media(max-width:640px){.c1,.c2{display:none}}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--meadow-deep);background:rgba(255,255,255,.6);display:inline-block;padding:6px 16px;border-radius:30px;margin-bottom:18px;position:relative;z-index:3}
+  .hero h1{font-family:'Baloo 2',cursive;font-weight:800;font-size:clamp(2.8rem,8vw,5.4rem);line-height:.98;color:var(--ink);position:relative;z-index:3;text-shadow:0 2px 0 #fff}
+  .hero h1 .gold{color:var(--honey)}
+  .hero .sub{font-size:clamp(1.05rem,2.4vw,1.35rem);color:var(--ink);font-weight:600;max-width:540px;margin:14px auto 0;position:relative;z-index:3}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:22px auto 0;position:relative;z-index:3;max-width:560px}
+  .chip{font-family:'Space Mono',monospace;font-size:.74rem;background:#fff;color:var(--ink-soft);padding:6px 13px;border-radius:20px;border:1.5px solid var(--line)}
+  .burrow-scene{position:relative;z-index:2;margin-top:8px;height:230px}
+  .mound{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:min(560px,90vw);height:150px;
+    background:radial-gradient(120% 100% at 50% 0,var(--burrow) 0%,var(--burrow-deep) 100%);border-radius:50% 50% 0 0}
+  .hole{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:150px;height:82px;
+    background:radial-gradient(90% 120% at 50% 0,#5E432C 0%,#3A2A1C 100%);border-radius:50% 50% 0 0}
+  .hero-marmot{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:132px;z-index:3;
+    --coat:#9C7248;--belly:#C9A876;--nose:#4A3B32;animation:peek 5s ease-in-out infinite}
+  .grass{position:absolute;bottom:0;width:100%;height:26px;
+    background:repeating-linear-gradient(95deg,var(--meadow) 0 6px,var(--meadow-deep) 6px 12px);
+    -webkit-mask:radial-gradient(circle at 3px 0,#000 3px,transparent 3px) 0 0/12px 26px repeat-x;
+            mask:radial-gradient(circle at 3px 0,#000 3px,transparent 3px) 0 0/12px 26px repeat-x}
+  .note{position:absolute;top:14px;left:58%;font-size:1.6rem;color:var(--berry);opacity:0;z-index:4;animation:whistle 5s ease-in-out infinite}
+  @keyframes peek{0%,18%{transform:translateX(-50%) translateY(30px)}30%,88%{transform:translateX(-50%) translateY(0)}100%{transform:translateX(-50%) translateY(30px)}}
+  @keyframes whistle{0%,40%{opacity:0;transform:translate(0,0)}55%{opacity:1}80%{opacity:0;transform:translate(14px,-40px)}100%{opacity:0}}
+
+  /* ---------- INTRO ---------- */
+  .intro{padding:60px 0 6px;text-align:center}
+  .intro h2{font-family:'Baloo 2',cursive;font-weight:700;font-size:clamp(1.7rem,4vw,2.4rem);color:var(--meadow-deep)}
+  .intro p{max-width:660px;margin:14px auto 0;font-size:1.08rem}
+  .intro em{color:var(--honey);font-weight:700;font-style:normal}
+
+  /* ---------- TOOLBAR ---------- */
+  .toolbar{position:sticky;top:0;z-index:20;background:rgba(237,241,230,.9);backdrop-filter:blur(8px);
+    border-bottom:2px solid var(--line);padding:14px 0;margin-top:26px}
+  .toolbar .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center}
+  .search{position:relative;flex:1;min-width:220px;max-width:340px}
+  .search input{width:100%;font-family:'Nunito';font-size:.95rem;font-weight:600;color:var(--ink);
+    background:#fff;border:2px solid var(--line);border-radius:24px;padding:10px 16px 10px 40px;outline:none;transition:border-color .2s}
+  .search input:focus{border-color:var(--honey)}
+  .search input::placeholder{color:#B9AE9C}
+  .search::before{content:"🔍";position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:.9rem;opacity:.6}
+  .filters{display:flex;gap:6px;flex-wrap:wrap}
+  .filters button{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.04em;cursor:pointer;
+    background:#fff;color:var(--ink-soft);border:2px solid var(--line);border-radius:22px;padding:8px 14px;transition:all .18s}
+  .filters button:hover{border-color:var(--honey)}
+  .filters button.active{background:var(--honey);color:#fff;border-color:var(--honey)}
+  .count{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--ink-soft);text-align:center;margin-top:10px}
+
+  /* ---------- SECTION LABEL ---------- */
+  .rack{display:flex;align-items:center;gap:16px;margin:34px 0 26px}
+  .rack::before,.rack::after{content:"";flex:1;height:2px;background:var(--line);border-radius:2px}
+  .rack span{font-family:'Baloo 2',cursive;font-weight:700;font-size:1.3rem}
+
+  /* ---------- CARD GRID ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:22px;padding-bottom:10px}
+  .card{background:var(--card);border:2px solid var(--line);border-radius:26px;padding:24px 24px 22px;position:relative;
+    transition:transform .28s cubic-bezier(.34,1.56,.64,1),box-shadow .28s,border-color .28s;opacity:0;transform:translateY(24px)}
+  .card.in{opacity:1;transform:translateY(0)}
+  .card:hover{transform:translateY(-8px) rotate(-.6deg);box-shadow:0 18px 34px -18px rgba(62,53,46,.4);border-color:var(--honey)}
+  .region-tag{position:absolute;top:16px;left:18px;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;
+    text-transform:uppercase;padding:3px 8px;border-radius:12px;color:#fff}
+  .region-tag.na{background:var(--meadow-deep)} .region-tag.eu{background:var(--sky-deep)} .region-tag.as{background:var(--honey)}
+  .art{width:118px;height:132px;margin:6px auto 6px;display:block;filter:drop-shadow(0 8px 10px rgba(62,53,46,.14));transition:transform .3s ease}
+  .card:hover .art{transform:translateY(-3px) scale(1.03)}
+  .cardnote{position:absolute;top:24px;right:28px;font-size:1.3rem;color:var(--berry);opacity:0;transition:.3s}
+  .card:hover .cardnote{opacity:1;transform:translate(6px,-8px)}
+  .name{font-family:'Baloo 2',cursive;font-weight:700;font-size:1.42rem;text-align:center;line-height:1.12}
+  .latin{font-family:'Space Mono',monospace;font-size:.76rem;font-style:italic;color:var(--ink-soft);text-align:center;margin-bottom:12px}
+  .aka{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:14px;min-height:22px}
+  .aka b{font-family:'Space Mono',monospace;font-weight:400;font-size:.68rem;color:var(--meadow-deep);background:#EAF0E2;padding:3px 9px;border-radius:14px}
+  .stats{border-top:1.5px dashed var(--line);padding-top:12px}
+  .stat{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;font-size:.86rem;padding:3px 0}
+  .stat .k{font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+  .stat .v{font-weight:700;text-align:right}
+  .whistle{display:flex;align-items:center;gap:10px;margin-top:10px}
+  .whistle .k{font-family:'Space Mono',monospace;font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap}
+  .bars{display:flex;gap:4px;flex:1;justify-content:flex-end;align-items:flex-end}
+  .bars i{width:8px;height:16px;border-radius:3px;background:var(--line);display:block}
+  .bars i.on{background:var(--berry)}
+  .bars i.on:nth-child(1){height:9px}.bars i.on:nth-child(2){height:12px}.bars i.on:nth-child(3){height:16px}
+  .bars i.on:nth-child(4){height:20px}.bars i.on:nth-child(5){height:24px}
+  .fact{font-size:.9rem;font-style:italic;margin-top:14px;line-height:1.45}
+  .fact::before{content:"❋ ";color:var(--honey);font-style:normal}
+  .flag{display:inline-block;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--berry);padding:3px 9px;border-radius:12px;margin-top:12px}
+  .empty{grid-column:1/-1;text-align:center;padding:50px 20px;color:var(--ink-soft);font-size:1.05rem;font-weight:600}
+
+  /* ---------- CHONK CHART ---------- */
+  .chonk{background:var(--card);border:2px solid var(--line);border-radius:32px;padding:34px 30px;margin:14px 0 0}
+  .chonk h3{font-family:'Baloo 2',cursive;font-weight:700;font-size:clamp(1.4rem,3.4vw,2rem);text-align:center}
+  .chonk .lede{text-align:center;color:var(--ink-soft);font-size:.9rem;font-family:'Space Mono',monospace;margin:6px auto 26px;max-width:520px}
+  .brow{display:grid;grid-template-columns:150px 1fr 56px;align-items:center;gap:12px;margin:9px 0}
+  .brow .bn{font-size:.82rem;font-weight:700;text-align:right;line-height:1.15}
+  .brow .bn small{display:block;font-family:'Space Mono',monospace;font-weight:400;font-size:.56rem;letter-spacing:.05em;text-transform:uppercase}
+  .brow .bn small.big{color:var(--honey)} .brow .bn small.small{color:var(--berry)}
+  .track{background:#EEE8DA;border-radius:20px;height:22px;overflow:hidden}
+  .fill{height:100%;width:0;border-radius:20px;background:linear-gradient(90deg,var(--meadow) 0%,var(--honey) 100%);transition:width 1s cubic-bezier(.22,1,.36,1)}
+  .fill.crown{background:linear-gradient(90deg,var(--honey) 0%,var(--berry) 100%)}
+  .brow .kg{font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;color:var(--ink)}
+  @media(max-width:520px){.brow{grid-template-columns:104px 1fr 44px;gap:8px}.brow .bn{font-size:.72rem}}
+
+  /* ---------- QUIZ ---------- */
+  .cta{display:inline-block;position:relative;z-index:3;margin-top:22px;font-family:'Baloo 2',cursive;font-weight:700;
+    font-size:1rem;color:#fff;background:var(--berry);padding:12px 26px;border-radius:30px;text-decoration:none;
+    box-shadow:0 10px 22px -8px var(--berry);transition:transform .2s}
+  .cta:hover{transform:translateY(-3px) scale(1.03)}
+  .quiz{background:linear-gradient(160deg,#fff 0%,var(--card) 100%);border:2px solid var(--line);border-radius:32px;
+    padding:38px 30px;margin:14px 0 0;text-align:center;min-height:360px;display:flex;flex-direction:column;justify-content:center}
+  .prog{font-family:'Space Mono',monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+  .dots{display:flex;gap:7px;justify-content:center;margin-bottom:22px}
+  .dots i{width:8px;height:8px;border-radius:50%;background:var(--line);transition:.2s}
+  .dots i.done{background:var(--honey)} .dots i.cur{background:var(--berry);transform:scale(1.35)}
+  .q{font-family:'Baloo 2',cursive;font-weight:700;font-size:clamp(1.4rem,3.6vw,2rem);line-height:1.15;max-width:560px;margin:0 auto 22px}
+  .opts{display:grid;gap:12px;max-width:520px;margin:0 auto;width:100%}
+  .opts button{font-family:'Nunito';font-weight:700;font-size:1rem;color:var(--ink);background:#fff;border:2px solid var(--line);
+    border-radius:20px;padding:15px 20px;cursor:pointer;text-align:left;transition:all .16s}
+  .opts button:hover{border-color:var(--berry);background:#FFF6F9;transform:translateX(4px)}
+  .opts .em{font-size:1.2rem;margin-right:10px}
+  .result{animation:pop .5s cubic-bezier(.34,1.56,.64,1)}
+  @keyframes pop{0%{opacity:0;transform:scale(.85)}100%{opacity:1;transform:scale(1)}}
+  .result svg{width:150px;height:168px;filter:drop-shadow(0 10px 14px rgba(62,53,46,.18))}
+  .youare{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--berry);margin-top:6px}
+  .result h3{font-family:'Baloo 2',cursive;font-weight:800;font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.06;margin:3px 0 2px}
+  .result .tag{font-family:'Baloo 2',cursive;font-weight:600;color:var(--honey);font-size:1.1rem;margin-bottom:12px}
+  .result p{max-width:480px;margin:0 auto 22px;font-size:1rem}
+  .actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .actions button,.actions a{font-family:'Baloo 2',cursive;font-weight:700;font-size:.95rem;cursor:pointer;border-radius:26px;padding:11px 22px;text-decoration:none;transition:transform .2s;border:2px solid var(--line)}
+  .retake{background:#fff;color:var(--ink)} .retake:hover{transform:translateY(-2px);border-color:var(--honey)}
+  .meet{background:var(--berry);color:#fff;border-color:var(--berry)} .meet:hover{transform:translateY(-2px)}
+  @keyframes cardglow{0%,100%{box-shadow:0 0 0 0 rgba(198,93,130,0)}30%{box-shadow:0 0 0 5px rgba(198,93,130,.45)}}
+  .card.glow{animation:cardglow 1.6s ease 2;border-color:var(--berry)!important}
+
+  /* ---------- FOOTER ---------- */
+  footer{margin-top:52px;background:var(--meadow);color:#fff;text-align:center;padding:48px 24px;border-radius:40px 40px 0 0}
+  footer .tw{font-family:'Baloo 2',cursive;font-weight:700;font-size:clamp(1.3rem,3.4vw,2rem);line-height:1.25;max-width:640px;margin:0 auto}
+  footer .ans{margin-top:16px;font-size:1rem;opacity:.95;max-width:560px;margin:16px auto 0}
+  footer .ans b{background:rgba(255,255,255,.22);padding:2px 8px;border-radius:8px}
+  footer .foot{margin-top:26px;font-family:'Space Mono',monospace;font-size:.72rem;opacity:.8;letter-spacing:.05em}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+    .card{opacity:1;transform:none}
+    .hero-marmot{transform:translateX(-50%)}
+    .fill{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="marmot" viewBox="0 0 200 230">
+    <ellipse cx="72" cy="214" rx="18" ry="11" fill="var(--nose)" opacity=".9"/>
+    <ellipse cx="128" cy="214" rx="18" ry="11" fill="var(--nose)" opacity=".9"/>
+    <ellipse cx="100" cy="150" rx="63" ry="73" fill="var(--coat)"/>
+    <ellipse cx="100" cy="163" rx="39" ry="53" fill="var(--belly)"/>
+    <ellipse cx="76" cy="152" rx="12" ry="15" fill="var(--coat)"/>
+    <ellipse cx="124" cy="152" rx="12" ry="15" fill="var(--coat)"/>
+    <line x1="70" y1="150" x2="70" y2="162" stroke="var(--nose)" stroke-width="1.4" opacity=".4"/>
+    <line x1="76" y1="152" x2="76" y2="164" stroke="var(--nose)" stroke-width="1.4" opacity=".4"/>
+    <line x1="124" y1="152" x2="124" y2="164" stroke="var(--nose)" stroke-width="1.4" opacity=".4"/>
+    <line x1="130" y1="150" x2="130" y2="162" stroke="var(--nose)" stroke-width="1.4" opacity=".4"/>
+    <ellipse cx="66" cy="34" rx="14" ry="15" fill="var(--coat)"/>
+    <ellipse cx="134" cy="34" rx="14" ry="15" fill="var(--coat)"/>
+    <ellipse cx="66" cy="36" rx="7" ry="8" fill="var(--belly)"/>
+    <ellipse cx="134" cy="36" rx="7" ry="8" fill="var(--belly)"/>
+    <circle cx="100" cy="70" r="47" fill="var(--coat)"/>
+    <ellipse cx="100" cy="88" rx="27" ry="21" fill="var(--belly)"/>
+    <circle cx="64" cy="82" r="10" fill="var(--berry)" opacity=".35"/>
+    <circle cx="136" cy="82" r="10" fill="var(--berry)" opacity=".35"/>
+    <circle cx="79" cy="60" r="8" fill="var(--nose)"/>
+    <circle cx="121" cy="60" r="8" fill="var(--nose)"/>
+    <circle cx="82" cy="57" r="2.6" fill="#fff"/>
+    <circle cx="124" cy="57" r="2.6" fill="#fff"/>
+    <ellipse cx="100" cy="79" rx="8" ry="6" fill="var(--nose)"/>
+    <path d="M100 84 q-9 9 -16 5 M100 84 q9 9 16 5" fill="none" stroke="var(--nose)" stroke-width="2" stroke-linecap="round"/>
+    <rect x="95" y="88" width="10" height="12" rx="2.5" fill="#fff" stroke="var(--nose)" stroke-width="1"/>
+    <line x1="100" y1="88" x2="100" y2="100" stroke="var(--nose)" stroke-width="1"/>
+    <g stroke="var(--nose)" stroke-width="1.3" stroke-linecap="round" opacity=".55">
+      <line x1="74" y1="80" x2="46" y2="76"/><line x1="74" y1="84" x2="48" y2="86"/>
+      <line x1="126" y1="80" x2="154" y2="76"/><line x1="126" y1="84" x2="152" y2="86"/>
+    </g>
+  </symbol>
+</svg>
+
+<header class="hero">
+  <div class="cloud c1"></div><div class="cloud c2"></div>
+  <span class="eyebrow">a cozy field guide</span>
+  <h1>The <span class="gold">Chuck</span> Almanac</h1>
+  <p class="sub">All fifteen marmots of the world — the chunkiest, whistliest ground squirrels there are.</p>
+  <div class="chips">
+    <span class="chip">woodchuck</span><span class="chip">rockchuck</span><span class="chip">whistle-pig</span>
+    <span class="chip">whistler</span><span class="chip">land-beaver</span><span class="chip">chuck</span>
+  </div>
+  <a class="cta" href="#quiz">✨ Which chuck are you?</a>
+  <div class="burrow-scene">
+    <div class="mound"></div><div class="note">♪</div>
+    <svg class="hero-marmot"><use href="#marmot"/></svg>
+    <div class="hole"></div><div class="grass"></div>
+  </div>
+</header>
+
+<section class="wrap intro">
+  <h2>Wait — what even <em>is</em> a chuck?</h2>
+  <p>All of these critters are marmots, the big-boned members of the ground-squirrel family (genus <em>Marmota</em>). Fun bit: "woodchuck" has nothing to do with wood <em>or</em> chucking — it comes from an Algonquian word like <em>wuchak</em>, and English speakers just squished it into words they recognized. The nickname stuck, so today we've got wood-chucks, rock-chucks, and whistle-pigs galore. Here are all fifteen — search or filter by home continent below.</p>
+</section>
+
+<div class="toolbar">
+  <div class="wrap">
+    <div class="row">
+      <div class="search"><input id="q" type="text" placeholder="search marmots & nicknames…" aria-label="Search marmots"></div>
+      <div class="filters" id="filters">
+        <button class="active" data-region="all">All 15</button>
+        <button data-region="na">🌲 N. America</button>
+        <button data-region="eu">🏔 Europe</button>
+        <button data-region="as">⛰ Asia</button>
+      </div>
+    </div>
+    <p class="count" id="count"></p>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="rack"><span>🌼 Meet the chonks</span></div>
+  <div class="grid" id="grid">
+
+    <article class="card" data-region="na" data-search="woodchuck groundhog whistle-pig land-beaver chuck marmota monax">
+      <span class="region-tag na">N. America</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#9C7248;--belly:#C9A876;--nose:#4A3B32;"><use href="#marmot"/></svg>
+      <div class="name">Woodchuck</div><div class="latin">Marmota monax</div>
+      <div class="aka"><b>groundhog</b><b>whistle-pig</b><b>land-beaver</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">Fields &amp; wood edges, E. N. America</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">2–6 kg</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
+      </div>
+      <p class="fact">The celebrity chuck — the one that "predicts" spring every Groundhog Day. More of a grunter than a screamer, but it'll whistle if spooked.</p>
+    </article>
+
+    <article class="card" data-region="na" data-search="yellow-bellied marmot rockchuck marmota flaviventris">
+      <span class="region-tag na">N. America</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#A67C4A;--belly:#E7B23F;--nose:#4A3B32;"><use href="#marmot"/></svg>
+      <div class="name">Yellow-bellied Marmot</div><div class="latin">Marmota flaviventris</div>
+      <div class="aka"><b>rockchuck</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">Rocky slopes, W. USA &amp; Canada</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">3–5 kg</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
+      </div>
+      <p class="fact">The classic "rockchuck," with a warm orange tummy and a white patch between the eyes. Lives in chatty colonies among the talus.</p>
+    </article>
+
+    <article class="card" data-region="na" data-search="hoary marmot whistler marmota caligata">
+      <span class="region-tag na">N. America</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#9AA0A6;--belly:#D7DBDE;--nose:#33383D;"><use href="#marmot"/></svg>
+      <div class="name">Hoary Marmot</div><div class="latin">Marmota caligata</div>
+      <div class="aka"><b>the whistler</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">Alpine NW North America</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">up to ~9 kg</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></div></div>
+      </div>
+      <p class="fact">Loudest of them all — its piercing alarm whistle is so iconic that Whistler, BC is literally named after it. Silvery shoulders, black "booted" feet.</p>
+    </article>
+
+    <article class="card" data-region="na" data-search="olympic marmot marmota olympus washington">
+      <span class="region-tag na">N. America</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#8A6E52;--belly:#C2A583;--nose:#453629;"><use href="#marmot"/></svg>
+      <div class="name">Olympic Marmot</div><div class="latin">Marmota olympus</div>
+      <div class="aka"><b>the heavyweight</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">Olympic Peninsula, WA — nowhere else</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">7–9 kg (a giant!)</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      </div>
+      <p class="fact">Found on one mountain range on Earth and nowhere else — and one of the very heaviest marmots going. Greets its neighbours nose-to-nose.</p>
+    </article>
+
+    <article class="card" data-region="na" data-search="vancouver island marmot marmota vancouverensis endangered">
+      <span class="region-tag na">N. America</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#5E4632;--belly:#E9E2D6;--nose:#2E241B;"><use href="#marmot"/></svg>
+      <div class="name">Vancouver Island Marmot</div><div class="latin">Marmota vancouverensis</div>
+      <div class="aka"><b>the rare one</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">Vancouver Island, BC — endemic</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">5–7 kg</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      </div>
+      <p class="fact">Rich chocolate coat with white splashes, and one of the rarest mammals anywhere. A dedicated recovery program has slowly been bringing numbers back.</p>
+      <span class="flag">Critically endangered</span>
+    </article>
+
+    <article class="card" data-region="na" data-search="alaska marmot brower marmota broweri brooks range arctic">
+      <span class="region-tag na">N. America</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#8E8B82;--belly:#C3BEB0;--nose:#3A362E;"><use href="#marmot"/></svg>
+      <div class="name">Alaska Marmot</div><div class="latin">Marmota broweri</div>
+      <div class="aka"><b>Brower's marmot</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">Brooks Range, Arctic Alaska</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">~2.5–4 kg</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      </div>
+      <p class="fact">The northernmost marmot, tucked into the Arctic. Its biggest worry is grizzly bears, which will happily excavate a whole burrow to reach one.</p>
+    </article>
+
+    <article class="card" data-region="eu" data-search="alpine marmot marmota marmota murmeltier marmotte europe alps">
+      <span class="region-tag eu">Europe</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#8F7F63;--belly:#C4B79A;--nose:#3E362B;"><use href="#marmot"/></svg>
+      <div class="name">Alpine Marmot</div><div class="latin">Marmota marmota</div>
+      <div class="aka"><b>murmeltier</b><b>marmotte</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">European Alps &amp; Carpathians</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">2–8 kg</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
+      </div>
+      <p class="fact">Family-minded Europeans who hibernate up to nine months, curled up together. A sentry stands watch and whistles when an eagle drifts overhead.</p>
+    </article>
+
+    <article class="card" data-region="as" data-search="bobak marmot steppe marmot marmota bobak sentinel eurasia">
+      <span class="region-tag as">Asia</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#C9A566;--belly:#E6D3A0;--nose:#4A3B2A;"><use href="#marmot"/></svg>
+      <div class="name">Bobak Marmot</div><div class="latin">Marmota bobak</div>
+      <div class="aka"><b>steppe marmot</b><b>little sentinel</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">Eurasian steppe grasslands</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">up to ~8 kg</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div></div>
+      </div>
+      <p class="fact">The sandy sentinel of the open steppe — famous for standing bolt-upright like a fence post to scan the grass, then diving underground for months.</p>
+    </article>
+
+    <article class="card" data-region="as" data-search="gray marmot grey altai marmot marmota baibacina central asia">
+      <span class="region-tag as">Asia</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#9A968C;--belly:#CFCABB;--nose:#3E3A32;"><use href="#marmot"/></svg>
+      <div class="name">Gray Marmot</div><div class="latin">Marmota baibacina</div>
+      <div class="aka"><b>Altai marmot</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">Altai &amp; Tian Shan, Central Asia</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">~5–7.5 kg</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      </div>
+      <p class="fact">A big, frosty-grey highlander of the Altai mountains — basically the bobak's chillier, cloud-coloured cousin, living in sprawling colonies.</p>
+    </article>
+
+    <article class="card" data-region="as" data-search="long-tailed marmot golden marmot red marmot marmota caudata pamir">
+      <span class="region-tag as">Asia</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#D19A3F;--belly:#EAC983;--nose:#5A3E22;"><use href="#marmot"/></svg>
+      <div class="name">Long-tailed Marmot</div><div class="latin">Marmota caudata</div>
+      <div class="aka"><b>golden marmot</b><b>red marmot</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">Pamir, Tian Shan &amp; Hindu Kush</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">~4–6 kg</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      </div>
+      <p class="fact">The show-off of the family: a long, flowing tail unlike its stubby cousins, and a golden coat that glows against grey high-mountain scree.</p>
+    </article>
+
+    <article class="card" data-region="as" data-search="himalayan marmot marmota himalayana tibet plateau">
+      <span class="region-tag as">Asia</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#C79A5A;--belly:#E8CE96;--nose:#3A2E22;"><use href="#marmot"/></svg>
+      <div class="name">Himalayan Marmot</div><div class="latin">Marmota himalayana</div>
+      <div class="aka"><b>sky-dweller</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">Tibetan Plateau, up to ~5,000 m</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">4–9 kg</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      </div>
+      <p class="fact">A high-altitude specialist living higher than most creatures dare. Ancient Greek tales of "gold-digging ants" may trace back to these burrowers.</p>
+    </article>
+
+    <article class="card" data-region="as" data-search="black-capped marmot marmota camtschatica siberia kamchatka">
+      <span class="region-tag as">Asia</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#7A6247;--belly:#C6AE86;--nose:#2A2018;"><use href="#marmot"/></svg>
+      <div class="name">Black-capped Marmot</div><div class="latin">Marmota camtschatica</div>
+      <div class="aka"><b>beret-wearer</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">NE Siberia &amp; Kamchatka</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">~4–5.5 kg</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      </div>
+      <p class="fact">Wears a smart dark "cap" over its head like a little beret, and lives about as far into the deep Siberian cold as a marmot can manage.</p>
+    </article>
+
+    <article class="card" data-region="as" data-search="tarbagan marmot mongolian marmot siberian marmot marmota sibirica">
+      <span class="region-tag as">Asia</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#B98E58;--belly:#DCC495;--nose:#463726;"><use href="#marmot"/></svg>
+      <div class="name">Tarbagan Marmot</div><div class="latin">Marmota sibirica</div>
+      <div class="aka"><b>Mongolian marmot</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">Mongolia, S. Siberia, NE China</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">~6–8 kg</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      </div>
+      <p class="fact">A heavyweight of the Mongolian steppe, woven into local culture for centuries. Do admire it from a distance, though — it's a known plague carrier.</p>
+      <span class="flag">Endangered</span>
+    </article>
+
+    <article class="card" data-region="as" data-search="forest-steppe marmot marmota kastschenkoi novosibirsk siberia">
+      <span class="region-tag as">Asia</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#B39763;--belly:#DAC599;--nose:#463726;"><use href="#marmot"/></svg>
+      <div class="name">Forest-steppe Marmot</div><div class="latin">Marmota kastschenkoi</div>
+      <div class="aka"><b>the newcomer</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">Forest-steppe of SW Siberia</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">~4–6 kg</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      </div>
+      <p class="fact">The newest name on the whole list — only recognized as its own species in the 2000s, after its chromosome count gave away that it wasn't a gray marmot.</p>
+    </article>
+
+    <article class="card" data-region="as" data-search="menzbier menzbier's marmot marmota menzbieri tien shan smallest">
+      <span class="region-tag as">Asia</span><span class="cardnote">♪</span>
+      <svg class="art" style="--coat:#BBA46B;--belly:#DECFA2;--nose:#4A3B28;"><use href="#marmot"/></svg>
+      <div class="name">Menzbier's Marmot</div><div class="latin">Marmota menzbieri</div>
+      <div class="aka"><b>the pocket marmot</b></div>
+      <div class="stats">
+        <div class="stat"><span class="k">Home turf</span><span class="v">Western Tian Shan, Central Asia</span></div>
+        <div class="stat"><span class="k">Chonk weight</span><span class="v">~2.5–4 kg (tiniest!)</span></div>
+        <div class="whistle"><span class="k">Whistle-o-meter</span><div class="bars"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></div></div>
+      </div>
+      <p class="fact">The smallest marmot on Earth, with the tiniest range too — and it's said to keep things simple with just a single-note alarm call.</p>
+      <span class="flag">Vulnerable</span>
+    </article>
+
+    <p class="empty" id="empty" style="display:none">No chucks match that. Try "rockchuck" or clear the search 🐾</p>
+  </div>
+
+  <div class="rack"><span>⚖️ How chonky, exactly?</span></div>
+  <section class="chonk" id="chonk">
+    <h3>The Chonk-o-meter</h3>
+    <p class="lede">Roughly how heavy each one gets at its chunkiest, in kg. Marmots nearly double their weight before hibernation, so these are late-summer "ready for winter" sizes.</p>
+    <div id="chonkbars"></div>
+  </section>
+
+  <div class="rack"><span>🎬 Which chuck are you?</span></div>
+  <section class="quiz" id="quiz">
+    <div id="quizbody"></div>
+  </section>
+</main>
+
+<footer>
+  <p class="tw">"How much wood would a woodchuck chuck<br>if a woodchuck could chuck wood?"</p>
+  <p class="ans">A wildlife biologist once did the maths on the dirt one shifts digging its burrow and joked the answer is about <b>320 kg</b> — roughly 700 pounds. Woodchucks, of course, chuck exactly zero wood.</p>
+  <p class="foot">The Chuck Almanac · all 15 marmots · made with sage, honey &amp; a great deal of whistling ♪</p>
+</footer>
+
+<script>
+  /* ---- reveal cards on scroll ---- */
+  const cards=[...document.querySelectorAll('.card')];
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.12});
+  cards.forEach(c=>io.observe(c));
+
+  /* ---- search + region filter ---- */
+  const q=document.getElementById('q'), countEl=document.getElementById('count'),
+        emptyEl=document.getElementById('empty'), filterBtns=[...document.querySelectorAll('#filters button')];
+  let region='all';
+  function apply(){
+    const term=q.value.trim().toLowerCase(); let shown=0;
+    cards.forEach(c=>{
+      const okR = region==='all' || c.dataset.region===region;
+      const okQ = !term || c.dataset.search.includes(term) || c.querySelector('.name').textContent.toLowerCase().includes(term);
+      const vis = okR && okQ;
+      c.style.display = vis?'':'none';
+      if(vis){ shown++; c.classList.add('in'); }
+    });
+    emptyEl.style.display = shown?'none':'';
+    const label = region==='all'?'':' · '+({na:'North America',eu:'Europe',as:'Asia'}[region]);
+    countEl.textContent = 'showing '+shown+' of 15 marmots'+label;
+  }
+  q.addEventListener('input',apply);
+  filterBtns.forEach(b=>b.addEventListener('click',()=>{
+    filterBtns.forEach(x=>x.classList.remove('active')); b.classList.add('active');
+    region=b.dataset.region; apply();
+  }));
+  apply();
+
+  /* ---- chonk chart ---- */
+  const chonk=[
+    {n:'Olympic Marmot',kg:9.3,note:'biggest'},
+    {n:'Hoary Marmot',kg:9},
+    {n:'Himalayan Marmot',kg:9},
+    {n:'Alpine Marmot',kg:8},
+    {n:'Tarbagan Marmot',kg:8},
+    {n:'Bobak Marmot',kg:7.5},
+    {n:'Gray Marmot',kg:7.5},
+    {n:'Vancouver Island Marmot',kg:7},
+    {n:'Long-tailed Marmot',kg:6},
+    {n:'Woodchuck',kg:6},
+    {n:'Black-capped Marmot',kg:5.5},
+    {n:'Forest-steppe Marmot',kg:5.5},
+    {n:'Yellow-bellied Marmot',kg:5},
+    {n:'Alaska Marmot',kg:4},
+    {n:'Menzbier\u2019s Marmot',kg:4,note:'smallest'}
+  ];
+  const MAX=10, host=document.getElementById('chonkbars');
+  chonk.forEach(m=>{
+    const row=document.createElement('div'); row.className='brow';
+    const tag = m.note==='biggest'?'<small class="big">👑 heaviest</small>' : m.note==='smallest'?'<small class="small">🌱 smallest</small>':'';
+    row.innerHTML='<div class="bn">'+m.n+tag+'</div>'+
+      '<div class="track"><div class="fill'+(m.note==='biggest'?' crown':'')+'" data-w="'+(m.kg/MAX*100)+'"></div></div>'+
+      '<div class="kg">'+m.kg+'</div>';
+    host.appendChild(row);
+  });
+  const cio=new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){
+      host.querySelectorAll('.fill').forEach((f,i)=>setTimeout(()=>f.style.width=f.dataset.w+'%', i*70));
+      cio.disconnect();
+    }});
+  },{threshold:.2});
+  cio.observe(document.getElementById('chonk'));
+
+  /* ---- WHICH CHUCK ARE YOU? quiz ---- */
+  const Q=[
+    {q:'Your ideal Saturday?',opts:[
+      {em:'🌿',t:'Alone in my garden, minding my own business',m:['woodchuck','menzbier','foreststeppe']},
+      {em:'☀️',t:'Sunbathing on a warm rock with the whole crew',m:['yellowbellied','gray','bobak']},
+      {em:'🏔',t:'Scaling the highest thing in sight',m:['himalayan','hoary','alpine']},
+      {em:'✨',t:'Being seen. Looking fabulous.',m:['longtailed','blackcapped','olympic']}]},
+    {q:'A hawk appears overhead. You…',opts:[
+      {em:'📢',t:'Let out the loudest scream in the valley',m:['hoary','bobak']},
+      {em:'🎵',t:'Give one calm, single warning note',m:['menzbier','foreststeppe']},
+      {em:'🫡',t:'Stand bolt upright on lookout duty',m:['bobak','alaska','alpine']},
+      {em:'💨',t:'…am already back in the burrow, thanks',m:['woodchuck','gray','vancouver']}]},
+    {q:'Pick a place to call home:',opts:[
+      {em:'🏡',t:'A cozy meadow near town',m:['woodchuck','yellowbellied']},
+      {em:'⛰',t:'One special mountain — mine alone',m:['olympic','vancouver']},
+      {em:'❄️',t:'The coldest, most remote edge of the map',m:['alaska','blackcapped','himalayan']},
+      {em:'🌾',t:'Wide-open steppe, horizon to horizon',m:['bobak','gray','tarbagan','longtailed']}]},
+    {q:'How do you do winter?',opts:[
+      {em:'😴',t:'Sleep nine whole months. No notes.',m:['alpine','hoary']},
+      {em:'👪',t:'A long snooze, curled up with family',m:['olympic','bobak','gray']},
+      {em:'🍽',t:'Bulk up HUGE first, then hibernate like a champ',m:['tarbagan','himalayan','olympic']},
+      {em:'🥶',t:'Tuck into the deep cold and tough it out',m:['alaska','blackcapped']}]},
+    {q:'Your signature look?',opts:[
+      {em:'🩶',t:'Frosty silver, distinguished',m:['hoary','gray']},
+      {em:'🟡',t:'Glowing golden — can’t miss me',m:['longtailed','yellowbellied']},
+      {em:'🎩',t:'A sharp dark cap, very chic',m:['blackcapped','tarbagan']},
+      {em:'🤎',t:'Rich chocolate brown, timeless',m:['vancouver','woodchuck','foreststeppe']}]},
+    {q:'Which is most you?',opts:[
+      {em:'⭐',t:'Quietly famous — everyone knows me',m:['woodchuck','himalayan']},
+      {em:'💪',t:'Rare and resilient, a comeback story',m:['vancouver','menzbier']},
+      {em:'🕵️',t:'The new kid nobody’s figured out yet',m:['foreststeppe','longtailed']},
+      {em:'🍩',t:'Big presence, bigger appetite',m:['olympic','tarbagan','hoary']}]}
+  ];
+  const M={
+    woodchuck:{name:'The Woodchuck',cn:'Woodchuck',tag:'Low-key Legend',c:['#9C7248','#C9A876','#4A3B32'],b:'You keep to yourself and tend your own patch — yet somehow still end up the most famous one in the room every February. Introvert icon.'},
+    yellowbellied:{name:'The Rockchuck',cn:'Yellow-bellied Marmot',tag:'Sunshine Socialite',c:['#A67C4A','#E7B23F','#4A3B32'],b:'Golden-bellied and always down to lounge on a warm rock with the whole crew. To you, life is one big group hang.'},
+    hoary:{name:'The Hoary Marmot',cn:'Hoary Marmot',tag:'Main-Character Energy',c:['#9AA0A6','#D7DBDE','#33383D'],b:'When you have something to say, the entire mountain hears it. They literally named a ski town after your voice.'},
+    olympic:{name:'The Olympic Marmot',cn:'Olympic Marmot',tag:'Gentle Giant',c:['#8A6E52','#C2A583','#453629'],b:'Big, warm and endlessly social — you greet everyone nose-to-nose, and there is genuinely no one else like you anywhere on Earth.'},
+    vancouver:{name:'The Vancouver Island Marmot',cn:'Vancouver Island Marmot',tag:'Rare Gem',c:['#5E4632','#E9E2D6','#2E241B'],b:'One of a kind, and a proper comeback story. You’ve been through it and came back stronger. Chocolate-coated resilience.'},
+    alaska:{name:'The Alaska Marmot',cn:'Alaska Marmot',tag:'Tough Cookie',c:['#8E8B82','#C3BEB0','#3A362E'],b:'You live where almost nothing else will, shrug off the cold, and keep one eye out for bears. Unbothered and unfrozen.'},
+    alpine:{name:'The Alpine Marmot',cn:'Alpine Marmot',tag:'Family First & Champion Napper',c:['#8F7F63','#C4B79A','#3E362B'],b:'Nine months of hibernation? You call that self-care. Loyal, cozy, and always looking out for the whole group.'},
+    bobak:{name:'The Bobak Marmot',cn:'Bobak Marmot',tag:'The Sentinel',c:['#C9A566','#E6D3A0','#4A3B2A'],b:'Standing tall, scanning the horizon, first to spot trouble. Steady, watchful, and quietly in charge of everyone’s safety.'},
+    gray:{name:'The Gray Marmot',cn:'Gray Marmot',tag:'Effortlessly Cool',c:['#9A968C','#CFCABB','#3E3A32'],b:'Cloud-coloured and totally chill. You roll deep with a big crew and never, ever let anything ruffle your fur.'},
+    longtailed:{name:'The Golden Marmot',cn:'Long-tailed Marmot',tag:'The Showstopper',c:['#D19A3F','#EAC983','#5A3E22'],b:'That glow. That tail. You were simply built different, and you know it. Heads turn on the scree.'},
+    himalayan:{name:'The Himalayan Marmot',cn:'Himalayan Marmot',tag:'High-Altitude Adventurer',c:['#C79A5A','#E8CE96','#3A2E22'],b:'You go higher than anyone dares — and there are actual ancient legends about you. Mysterious, elevated, literally.'},
+    blackcapped:{name:'The Black-capped Marmot',cn:'Black-capped Marmot',tag:'The Style Icon',c:['#7A6247','#C6AE86','#2A2018'],b:'That dark little cap? Chef’s kiss. You bring high fashion to the harshest corner of Siberia and make it look easy.'},
+    tarbagan:{name:'The Tarbagan Marmot',cn:'Tarbagan Marmot',tag:'Big Deal, Big Appetite',c:['#B98E58','#DCC495','#463726'],b:'Culturally iconic, seriously chonky, and juuust a little bit dangerous to get too close to. You have presence.'},
+    foreststeppe:{name:'The Forest-steppe Marmot',cn:'Forest-steppe Marmot',tag:'The Enigma',c:['#B39763','#DAC599','#463726'],b:'Nobody realised you were your own thing until recently. Understated, underrated, and quietly one of a kind.'},
+    menzbier:{name:'The Menzbier’s Marmot',cn:'Menzbier’s Marmot',tag:'Small but Mighty',c:['#BBA46B','#DECFA2','#4A3B28'],b:'Tiniest of them all and a minimalist to the core — one perfect note says everything you need to say. Big things, small package.'}
+  };
+  let step=0, scores={};
+  const qbody=document.getElementById('quizbody');
+  function renderQ(){
+    if(step>=Q.length){return revealQ();}
+    const it=Q[step];
+    let dots=''; for(let i=0;i<Q.length;i++) dots+='<i class="'+(i<step?'done':i===step?'cur':'')+'"></i>';
+    const opts=it.opts.map((o,i)=>'<button data-i="'+i+'"><span class="em">'+o.em+'</span>'+o.t+'</button>').join('');
+    qbody.innerHTML='<div class="prog">Question '+(step+1)+' of '+Q.length+'</div><div class="dots">'+dots+'</div><div class="q">'+it.q+'</div><div class="opts">'+opts+'</div>';
+    qbody.querySelectorAll('.opts button').forEach(btn=>btn.addEventListener('click',()=>{
+      it.opts[+btn.dataset.i].m.forEach(k=>scores[k]=(scores[k]||0)+1);
+      step++; renderQ();
+    }));
+  }
+  function revealQ(){
+    let best=-1, top=[];
+    for(const k in M){const s=scores[k]||0; if(s>best){best=s;top=[k];} else if(s===best){top.push(k);}}
+    const m=M[top[Math.floor(Math.random()*top.length)]];
+    qbody.innerHTML='<div class="result"><svg viewBox="0 0 200 230" style="--coat:'+m.c[0]+';--belly:'+m.c[1]+';--nose:'+m.c[2]+'"><use href="#marmot"/></svg>'+
+      '<div class="youare">You are…</div><h3>'+m.name+'</h3><div class="tag">'+m.tag+'</div><p>'+m.b+'</p>'+
+      '<div class="actions"><a class="meet">Meet the real me →</a><button class="retake">Take it again ↺</button></div></div>';
+    qbody.querySelector('.retake').addEventListener('click',()=>{step=0;scores={};renderQ();});
+    qbody.querySelector('.meet').addEventListener('click',()=>{
+      q.value=''; region='all'; filterBtns.forEach(x=>x.classList.toggle('active',x.dataset.region==='all')); apply();
+      const card=cards.find(c=>c.querySelector('.name').textContent.trim()===m.cn);
+      if(card){card.scrollIntoView({behavior:'smooth',block:'center'});card.classList.add('glow');setTimeout(()=>card.classList.remove('glow'),3400);}
+    });
+  }
+  renderQ();
+</script>
+</body>
+</html>
